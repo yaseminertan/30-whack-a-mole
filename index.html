@@ -34,11 +34,20 @@
 <script>
     const holes=document.querySelectorAll('.hole');
     const moles=document.querySelectorAll('.moles');
-    const max=200;
-    const min=20;
-    function startGame(holes){
+    const max=1000;
+    const min=800;
+    let timeUp=false;
+    setTimeout(() => timeUp = true, 10000)
+    function startGame(){
         const time=Math.round(Math.random()*(max-min)+min);
-        const hole=holes[Math.round(Math.random()*holes.length)];
+        const hole=holes[Math.floor(Math.random()*holes.length)];
+        hole.classList.add('up');
+        setTimeout(()=>{ 
+            hole.classList.remove('up');
+            if(!timeUp)
+                startGame();
+        },time);
+
     }
 </script>
 <style>
